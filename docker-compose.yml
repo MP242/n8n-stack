@@ -81,8 +81,7 @@ services:
     volumes:
       - ./n8n/demo-data:/demo-data
     depends_on:
-      postgres:
-        condition: service_healthy
+      - postgres
 
   n8n:
     <<: *service-n8n
@@ -97,10 +96,8 @@ services:
       - ./shared:/data/shared
       - ./custom_node:/home/node/.n8n/custom
     depends_on:
-      postgres:
-        condition: service_healthy
-      n8n-import:
-        condition: service_completed_successfully
+      - postgres
+      - n8n-import
 
   qdrant:
     image: qdrant/qdrant
