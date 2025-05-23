@@ -92,9 +92,9 @@ services:
       - 5678:5678
     volumes:
       - n8n_storage:/home/node/.n8n
-      - ./n8n/demo-data:/demo-data
-      - ./shared:/data/shared
-      - ./custom_node:/home/node/.n8n/custom
+      # - ./n8n/demo-data:/demo-data
+      # - ./shared:/data/shared
+      # - ./custom_node:/home/node/.n8n/custom
     depends_on:
       - postgres
       - n8n-import
