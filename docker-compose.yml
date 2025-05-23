@@ -111,11 +111,9 @@ services:
       - qdrant_storage:/qdrant/storage
 
   ollama-cpu:
-    profiles: ["cpu"]
     <<: *service-ollama
 
   ollama-pull-llama-cpu:
-    profiles: ["cpu"]
     <<: *init-ollama
     depends_on:
       - ollama-cpu
