@@ -98,6 +98,12 @@ services:
     depends_on:
       - postgres
       - n8n-import
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.n8n.rule=Host(`n8n.dev-oi.fr`)"
+      - "traefik.http.routers.n8n.entrypoints=websecure"
+      - "traefik.http.routers.n8n.tls.certResolver=letsencrypt"
+      - "traefik.http.services.n8n.loadbalancer.server.port=5678"
 
   qdrant:
     image: qdrant/qdrant
