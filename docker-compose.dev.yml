@@ -95,7 +95,9 @@ services:
       - n8n_storage:/home/node/.n8n
       # - /demo-data:/demo-data
       # - ./shared:/data/shared
-      - /etc/dokploy/compose/n8n-n8nstack-ze6zva/code/custom_node:/home/node/.n8n/custom
+      #local dev
+      - ./custom_node:/home/node/.n8n/custom
+      # - /etc/dokploy/compose/n8n-n8nstack-ze6zva/code/custom_node:/home/node/.n8n/custom
     depends_on:
       - postgres
       - n8n-import
@@ -113,6 +115,9 @@ services:
     container_name: openwebui
     networks: ["n8n"]
     restart: unless-stopped
+    # local dev
+    ports:
+      - 3000:8080
     environment:
       - OLLAMA_BASE_URL=http://ollama:11434
       - WEBUI_SECRET_KEY=

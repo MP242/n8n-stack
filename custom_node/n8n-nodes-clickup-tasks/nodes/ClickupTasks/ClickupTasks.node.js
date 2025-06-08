@@ -21,6 +21,7 @@ class ClickupTasks {
                     required: true,
                 },
             ],
+            usableAsTool: true,
             requestDefaults: {
                 baseURL: 'https://api.clickup.com/api/v2',
                 headers: {
@@ -37,14 +38,6 @@ class ClickupTasks {
                     required: true,
                     description: 'The space to get all the tasks from all Backlog lists',
                 },
-                {
-                    displayName: 'Date Done Greater Than',
-                    name: 'date_done_gt_timestamp',
-                    type: 'number',
-                    default: 1746468769057,
-                    required: true,
-                    description: 'The date done greater than in timestamp, ex: 1746468769057',
-                },
             ],
         };
     }
@@ -52,8 +45,9 @@ class ClickupTasks {
         const returnData = [];
         const credentials = await this.getCredentials('clickupApi');
         const apiKey = credentials.apiKey;
-        const date_done_gt_timestamp = this.getNodeParameter('date_done_gt_timestamp', 0);
-        console.log('date_done_gt_timestamp', date_done_gt_timestamp);
+        const now = new Date();
+        const sevenDaysAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+        const date_done_gt_timestamp = sevenDaysAgo.getTime();
         const options = {
             headers: {
                 Authorization: apiKey,
