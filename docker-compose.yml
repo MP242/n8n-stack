@@ -8,7 +8,8 @@ volumes:
 networks:
   n8n:
 
-x-n8n: &service-n8n # image: n8nio/n8n:latest
+x-n8n: &service-n8n
+  image: n8nio/n8n:mp242
   build:
     context: .
     dockerfile: Dockerfile
