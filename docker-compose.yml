@@ -69,17 +69,17 @@ services:
       timeout: 5s
       retries: 10
 
-  n8n-import:
-    <<: *service-n8n
-    hostname: n8n-import
-    entrypoint: /bin/sh
-    command:
-      - "-c"
-      - "n8n import:credentials --separate --input=/demo-data/credentials && n8n import:workflow --separate --input=/demo-data/workflows"
-    volumes:
-      - ./n8n/demo-data:/demo-data
-    depends_on:
-      - postgres
+  # n8n-import:
+  #   <<: *service-n8n
+  #   hostname: n8n-import
+  #   entrypoint: /bin/sh
+  #   command:
+  #     - "-c"
+  #     - "n8n import:credentials --separate --input=/demo-data/credentials && n8n import:workflow --separate --input=/demo-data/workflows"
+  #   volumes:
+  #     - ./n8n/demo-data:/demo-data
+  #   depends_on:
+  #     - postgres
 
   n8n:
     <<: *service-n8n
@@ -93,7 +93,7 @@ services:
       # - /etc/dokploy/compose/n8n-n8nstack-ze6zva/code/custom_node:/home/node/.n8n/custom
     depends_on:
       - postgres
-      - n8n-import
+      # - n8n-import
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.n8n.rule=Host(`n8n.dev-oi.fr`)"
