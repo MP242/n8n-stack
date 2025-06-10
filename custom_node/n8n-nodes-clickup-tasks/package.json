@@ -47,11 +47,15 @@
         "typescript": "^5.5.3"
     },
     "dependencies": {
-        "@azure/storage-blob": "^12.27.0",
         "@types/request": "^2.48.12",
         "n8n-core": "^1.14.1",
         "n8n-workflow": "^1.14.1",
         "request": "^2.88.2",
         "ts-node": "^10.9.2"
+    },
+    "pnpm": {
+        "overrides": {
+            "@azure/storage-blob": "file:empty-package"
+        }
     }
 }
