@@ -12,13 +12,12 @@ RUN mkdir -p /home/node/.n8n/custom
 # Copier les custom nodes dans n8n
 COPY --chown=node:node custom_node/ /home/node/.n8n/custom/
 
-# Installer les dépendances des custom nodes avec pnpm (version BusyBox compatible)
+# Installation super simple : boucle sur tous les dossiers
 WORKDIR /home/node/.n8n/custom
-RUN find . -name "package.json" -type f -exec sh -c 'echo "Installation des dépendances dans $(dirname {})" && cd "$(dirname {})" && pnpm install --prod --frozen-lockfile --prefer-offline' \; || \
-    find . -name "package.json" -type f -exec sh -c 'echo "Fallback: installation avec pnpm install dans $(dirname {})" && cd "$(dirname {})" && pnpm install --prod' \; || true
-
-# Nettoyer le cache pnpm pour réduire la taille de l'image
-# RUN pnpm store prune || true
+RUN for dir in */; do \
+        echo "=== Installation dans $dir ==="; \
+        cd "$dir" && pnpm install --prod && cd ..; \
+    done || true
 
 # Définir le répertoire de travail final
 WORKDIR /home/node
