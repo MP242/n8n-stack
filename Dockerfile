@@ -18,7 +18,7 @@ RUN find . -name "package.json" -type f -exec sh -c 'echo "Installation des dép
     find . -name "package.json" -type f -exec sh -c 'echo "Fallback: installation avec pnpm install dans $(dirname {})" && cd "$(dirname {})" && pnpm install --prod' \; || true
 
 # Nettoyer le cache pnpm pour réduire la taille de l'image
-RUN pnpm store prune || true
+# RUN pnpm store prune || true
 
 # Définir le répertoire de travail final
 WORKDIR /home/node
