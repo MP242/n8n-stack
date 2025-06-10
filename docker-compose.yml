@@ -8,13 +8,15 @@ volumes:
   open-webui:
 
 networks:
-  n8n:
+  dokploy-network:
+    external: true
 
 services:
   postgres:
     image: postgres:16-alpine
     hostname: postgres
-    networks: ["n8n"]
+    networks:
+      - dokploy-network
     environment:
       - POSTGRES_USER
       - POSTGRES_PASSWORD
@@ -35,7 +37,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    networks: ["n8n"]
+    image: n8n-mp242:latest
+    networks:
+      - dokploy-network
     environment:
       - DB_TYPE=postgresdb
       - DB_POSTGRESDB_HOST=postgres
@@ -51,8 +55,8 @@ services:
     env_file:
       - .env
     hostname: n8n
-    ports:
-      - 5678:5678
+    expose:
+      - 5678
     volumes:
       - n8n_storage:/home/node/.n8n
     depends_on:
@@ -67,7 +71,8 @@ services:
   openwebui:
     image: ghcr.io/open-webui/open-webui:main
     hostname: openwebui
-    networks: ["n8n"]
+    networks:
+      - dokploy-network
     environment:
       - OLLAMA_BASE_URL=http://ollama:11434
       - WEBUI_SECRET_KEY=
@@ -87,16 +92,18 @@ services:
   qdrant:
     image: qdrant/qdrant
     hostname: qdrant
-    networks: ["n8n"]
-    ports:
-      - 6333:6333
+    networks:
+      - dokploy-network
+    expose:
+      - 6333
     volumes:
       - qdrant_storage:/qdrant/storage
 
   ollama-cpu:
     image: ollama/ollama:latest
-    networks: ["n8n"]
-    ports:
-      - 11434:11434
+    networks:
+      - dokploy-network
+    expose:
+      - 11434
     volumes:
       - ollama_storage:/root/.ollama
