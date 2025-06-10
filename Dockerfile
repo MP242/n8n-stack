@@ -16,7 +16,7 @@ COPY --chown=node:node custom_node/ /home/node/.n8n/custom/
 WORKDIR /home/node/.n8n/custom
 RUN for dir in */; do \
         echo "=== Installation dans $dir ==="; \
-        cd "$dir" && pnpm install --prod && cd ..; \
+        cd "$dir" && npm install --production --no-optional && cd ..; \
     done || true
 
 # Définir le répertoire de travail final
