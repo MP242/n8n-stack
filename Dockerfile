@@ -1,10 +1,16 @@
 FROM n8nio/n8n:1.60.1
 
-# Passer à l'utilisateur node dès le début pour la sécurité
-USER node
+# Passer à l'utilisateur root pour les installations globales
+USER root
 
-# Vérifier et installer pnpm@10.12.1 si nécessaire (normalement déjà présent dans l'image n8n)
-RUN command -v pnpm >/dev/null 2>&1 || npm install -g pnpm@10.12.1
+# Désactiver Corepack qui cause les problèmes de signature
+RUN corepack disable
+
+# Installer pnpm manuellement via npm
+RUN npm install -g pnpm@10.12.1
+
+# Repasser à l'utilisateur node
+USER node
 
 # Créer le répertoire custom s'il n'existe pas
 RUN mkdir -p /home/node/.n8n/custom
