@@ -110,12 +110,12 @@ services:
     depends_on:
       - postgres
       - n8n-import
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.n8n.rule=Host(`n8n.dev-oi.fr`)"
-      - "traefik.http.routers.n8n.entrypoints=websecure"
-      - "traefik.http.routers.n8n.tls.certResolver=letsencrypt"
-      - "traefik.http.services.n8n.loadbalancer.server.port=5678"
+    # labels:
+    #   - "traefik.enable=true"
+    #   - "traefik.http.routers.n8n.rule=Host(`n8n.dev-oi.fr`)"
+    #   - "traefik.http.routers.n8n.entrypoints=websecure"
+    #   - "traefik.http.routers.n8n.tls.certResolver=letsencrypt"
+    #   - "traefik.http.services.n8n.loadbalancer.server.port=5678"
 
   openwebui:
     image: ghcr.io/open-webui/open-webui:main
@@ -138,12 +138,12 @@ services:
       - ollama-cpu
     volumes:
       - open-webui:/app/backend/data
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.openwebui.rule=Host(`openwebui.dev-oi.fr`)"
-      - "traefik.http.routers.openwebui.entrypoints=websecure"
-      - "traefik.http.routers.openwebui.tls.certResolver=letsencrypt"
-      - "traefik.http.services.openwebui.loadbalancer.server.port=8080"
+    # labels:
+    #   - "traefik.enable=true"
+    #   - "traefik.http.routers.openwebui.rule=Host(`openwebui.dev-oi.fr`)"
+    #   - "traefik.http.routers.openwebui.entrypoints=websecure"
+    #   - "traefik.http.routers.openwebui.tls.certResolver=letsencrypt"
+    #   - "traefik.http.services.openwebui.loadbalancer.server.port=8080"
 
   qdrant:
     image: qdrant/qdrant
