@@ -113,7 +113,6 @@ services:
       - "traefik.http.services.n8n.loadbalancer.server.port=5678"
 
   openwebui:
-    <<: *service-n8n
     image: ghcr.io/open-webui/open-webui:main
     hostname: openwebui
     container_name: openwebui
