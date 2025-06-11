@@ -16,7 +16,7 @@ USER node
 RUN mkdir -p /home/node/.n8n/custom
 
 # Copier les custom nodes dans n8n
-COPY --chown=node:node custom_node/ /home/node/.n8n/custom/
+# COPY --chown=node:node custom_node/ /home/node/.n8n/custom/
 
 # Installation des dépendances de production
 # WORKDIR /home/node/.n8n/custom
