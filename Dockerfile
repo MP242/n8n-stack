@@ -1,6 +1,9 @@
 # Utilise l'image officielle n8n (version stable)
 FROM n8nio/n8n:latest
 
+# Creer le repertoire custom
+RUN mkdir -p /home/node/.n8n/custom
+
 # (Optionnel) Copier des fichiers personnalisés dans le container
 COPY ./custom_node /home/node/.n8n/custom
 
