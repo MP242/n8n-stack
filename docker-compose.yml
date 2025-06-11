@@ -102,6 +102,7 @@ services:
       - 5678
     volumes:
       - n8n_storage:/home/node/.n8n
+      - ./custom_node:/home/node/.n8n/custom:ro
       # - /demo-data:/demo-data
       # - ./shared:/data/shared
       #local dev
