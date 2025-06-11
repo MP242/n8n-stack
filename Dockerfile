@@ -19,11 +19,11 @@ RUN mkdir -p /home/node/.n8n/custom
 COPY --chown=node:node custom_node/ /home/node/.n8n/custom/
 
 # Installation des dépendances de production
-WORKDIR /home/node/.n8n/custom
-RUN for dir in */; do \
-        echo "=== Installation dans $dir ==="; \
-        cd "$dir" && pnpm install --prod --no-optional && cd ..; \
-    done || true
+# WORKDIR /home/node/.n8n/custom
+# RUN for dir in */; do \
+#         echo "=== Installation dans $dir ==="; \
+#         cd "$dir" && pnpm install --prod --no-optional && cd ..; \
+#     done || true
 
 # Définir le répertoire de travail final
 WORKDIR /home/node
