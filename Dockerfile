@@ -1,4 +1,4 @@
-FROM n8nio/n8n:1.60.1
+FROM n8nio/n8n:1.97.0
 
 # Passer à l'utilisateur root pour les installations globales
 USER root
